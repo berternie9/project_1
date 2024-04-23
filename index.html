@@ -6,9 +6,70 @@
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
     <script defer src="app.js"></script>
-    <title>Document</title>
+    <title>Tic Tac Toe</title>
 </head>
 <body>
-    
+    <div class="page-wrapper">
+        <header>
+            <div class="mute-btn-wrapper">
+                <img class="mute-btn" width="30" src="images/mute_icon.png" alt="mute icon">
+            </div>
+        </header>
+        <h1 class="title">Tic Tac Toe</h1>
+        <div class="metadata-wrapper">
+            <div class="game-mode">Mode: 2 player</div>
+            <div class="whose-turn">Turn: Player 1</div>
+            <div class="win-counter-wrapper"> 
+                <div class="playerA">Player 1: 0</div>
+                <div class="playerB">Player 2: 0</div>
+            </div>
+            <div class="winner">Winner: </div>
+        </div>
+        <div class="game-wrapper">
+            <div class="left-panel">
+                <div class="by3-btn">3 x 3</div>
+                <div class="by4-btn">4 x 4</div>
+            </div>
+            <div class="center-panel">
+                <div class="main-game">
+                    <div class="squares-wrapper-by3">
+                        <div data-x="1" data-y="1" class="square-by3">X</div>
+                        <div data-x="1" data-y="2" class="square-by3">O</div>
+                        <div data-x="1" data-y="3" class="square-by3"></div>
+                        <div data-x="2" data-y="1" class="square-by3"></div>
+                        <div data-x="2" data-y="2" class="square-by3"></div>
+                        <div data-x="2" data-y="3" class="square-by3"></div>
+                        <div data-x="3" data-y="1" class="square-by3"></div>
+                        <div data-x="3" data-y="2" class="square-by3"></div>
+                        <div data-x="3" data-y="3" class="square-by3"></div>
+                    </div>
+                    <div class="squares-wrapper-by4">
+                        <div data-label="1" class="square-by4"></div>
+                        <div data-label="2" class="square-by4"></div>
+                        <div data-label="3" class="square-by4"></div>
+                        <div data-label="4" class="square-by4"></div>
+                        <div data-label="5" class="square-by4"></div>
+                        <div data-label="6" class="square-by4"></div>
+                        <div data-label="7" class="square-by4"></div>
+                        <div data-label="8" class="square-by4"></div>
+                        <div data-label="9" class="square-by4"></div>
+                        <div data-label="10" class="square-by4"></div>
+                        <div data-label="11" class="square-by4"></div>
+                        <div data-label="12" class="square-by4"></div>
+                        <div data-label="13" class="square-by4"></div>
+                        <div data-label="14" class="square-by4"></div>
+                        <div data-label="15" class="square-by4"></div>
+                        <div data-label="16" class="square-by4"></div>
+                    </div>
+                </div>
+                <div class="reset-game-btn">Reset</div>
+            </div>
+            <div class="right-panel">
+                <div class="two-player-btn">2 player</div>
+                <div class="bot-smart-btn">Bot (smart)</div>
+                <div class="bot-simple-btn">Bot (simple)</div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
