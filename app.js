@@ -1,3 +1,4 @@
+console.log("Hello");
 // Globals
 // Cache DOM element references
 // Setup event listeners

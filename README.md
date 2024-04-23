@@ -8,10 +8,13 @@ Check out my project [here](https://berternie9.github.io/tic-tac-toe/)!
 Any instructions here. 
 
 ## Screenshots
+![Screenshots here](images/screenshot.png)
 
 ## Technologies used
-JS, HTML, CSS
-GitHub Pages
+- JS
+- HTML
+- CSS
+- GitHub Pages
 
 ## Next steps
 Icebox items
