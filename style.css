@@ -207,13 +207,15 @@ header {
     }
 
     .square-by3 {
-        width: 12vh;
-        height: 12vh;
+        width: 5rem;;
+        height: 5rem;
+        font-size: 2rem;
     }
 
     .square-by4 {
-        width: 9vh;
-        height: 9vh;
+        width: 3.75rem;
+        height: 3.75rem;
+        font-size: 1.5rem;
     }
 
     .title {
