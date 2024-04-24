@@ -1,34 +1,24 @@
 # Tic Tac Toe
-Description of game.
-Background info.
+Think you're good at Tic Tac Toe?
+Think again! 
+
+Try your luck against.. a BOT! 🤖
+
+Beep boop. 
 
 ## Getting Started
-Check out my project [here](https://berternie9.github.io/tic-tac-toe/)!
-
-Any instructions here. 
+Check out my Tic Tac Toe game [here](https://berternie9.github.io/tic-tac-toe/)!
 
 ## Screenshots
-![Screenshots here](images/screenshot.png)
+#### Player vs. smart bot (4x4)
+![Screenshots here](images/screenshot_smart_4.png)
 
 ## Technologies used
-- JS
+- Javascript
 - HTML
 - CSS
 - GitHub Pages
 
 ## Next steps
-Icebox items
-
-
-
-
-<!-- 
-☐ <Your game's title>: A description of your game. Background info of the game is a nice touch.
-
-☐ Screenshot(s): Images of your actual game.
-
-☐ Technologies Used: List of the technologies used, e.g., JavaScript, HTML, CSS...
-
-☐ Getting Started: In this section include the link to your deployed game and any instructions you deem important.
-
-☐ Next Steps: Planned future enhancements (icebox items). -->
+- Include music
+- Include animations when winning and when checking boxes
