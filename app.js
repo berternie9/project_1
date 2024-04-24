@@ -232,7 +232,7 @@
         } else {
             audioTag.pause();
         }
-        audioTag.volume = 0.05;
+        audioTag.volume = 0.03;
         audioTag.loop = true;
     }
 

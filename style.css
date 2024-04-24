@@ -1,6 +1,6 @@
 body {
-    background-image: url();
     background-color: mistyrose;
+    background-image: linear-gradient(to right, rgba(255,255,255,0.7), rgba(255,255,255,.7)), url(static/wallpaper.jpg);
     margin: 0;
     font-family: "Sriracha", sans-serif;
 }
@@ -14,14 +14,14 @@ header {
 }
 
 .by3-btn, .by4-btn, .reset-game-btn, .bot-simple-btn, .bot-smart-btn, .two-player-btn {
-    border: 2px white solid;
+    border: 2px #006666 solid;
     margin: 5px;
     padding: 8px;
     border-radius: 10px;
     width: fit-content;
-    background-image: linear-gradient(to right, rgba(255,255,255,.5), rgba(255,255,255,.5));
+    background-image: linear-gradient(to right, rgba(0,102,102,.2), rgba(0,102,102,.2));
     cursor: pointer;
-    color: #6f93c3;
+    color: #006666;
 }
 
 .disabled {
@@ -51,7 +51,7 @@ header {
     grid-template-columns: repeat(4, 1fr);
     height: 7vh;
     margin: 0 auto;
-    color: lightsteelblue;
+    color: #009999;
     font-weight: bold;
     font-size: 1.2rem;
 }
@@ -94,7 +94,7 @@ header {
 .square-by3, .square-by4 {
     display: grid;
     font-size: 3rem;
-    color: white;
+    color: #006666;
     align-items: center;
     justify-items: center;
     cursor: crosshair;
@@ -106,19 +106,19 @@ header {
 }
 
 .square-by3:nth-child(3n+1){
-    border-right: 1px white solid;
+    border-right: 1px #006666 solid;
 }
 
 .square-by3:nth-child(3n){
-    border-left: 1px white solid;
+    border-left: 1px #006666 solid;
 }
 
 .square-by3:nth-child(1), .square-by3:nth-child(2), .square-by3:nth-child(3){
-    border-bottom: 1px white solid;
+    border-bottom: 1px #006666 solid;
 }
 
 .square-by3:nth-child(7), .square-by3:nth-child(8), .square-by3:nth-child(9){
-    border-top: 1px white solid;
+    border-top: 1px #006666 solid;
 }
 
 .square-by4 {
@@ -127,21 +127,93 @@ header {
 }
 
 .square-by4:nth-child(4n+1), .square-by4:nth-child(4n+2), .square-by4:nth-child(4n+3) {
-    border-right: 1px white solid;
+    border-right: 1px #006666 solid;
 }
 
 .square-by4:nth-child(1), .square-by4:nth-child(2), .square-by4:nth-child(3), .square-by4:nth-child(4), .square-by4:nth-child(5), .square-by4:nth-child(6), .square-by4:nth-child(7), .square-by4:nth-child(8), .square-by4:nth-child(9), .square-by4:nth-child(10), .square-by4:nth-child(11), .square-by4:nth-child(12){
-    border-bottom: 1px white solid;
+    border-bottom: 1px #006666 solid;
 }
 
 .title {
     text-align: center;
     text-decoration: underline;
     margin: 1% 0;
-    color: #6f93c3;
+    color: #006666;
     font-family: "Sriracha", sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 3rem;
     height: 15vh;
+}
+
+@media (max-width: 420px) {
+    .by3-btn, .by4-btn, .reset-game-btn, .bot-simple-btn, .bot-smart-btn, .two-player-btn {
+        margin: 5px;
+        padding: 5px;
+        color: #006666;
+        font-size: 0.8rem;
+    }
+
+    .center-panel {
+        display: grid;
+        grid-template-rows: repeat(2, auto);
+    }
+
+    .game-wrapper {
+        grid-template-columns: none;
+        grid-template-rows: repeat(3, auto);
+        height: 40vh;
+        padding: 0.5rem;
+        margin-top: 0.6rem;
+    }
+
+    .left-panel {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .metadata-wrapper {
+        display: grid;
+        width: 75vw;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        height: 11vh;
+        margin: 0 auto;
+        color: #009999;
+        font-weight: normal;
+        font-size: 0.8rem;
+        align-items: start;
+        justify-items: center;
+        gap: 1%;
+    }
+
+    .mute-btn-wrapper {
+        padding: 0.1rem;
+    }
+
+    .reset-game-btn {
+        justify-self: center;
+        margin-top: 1.7rem;
+    }
+
+    .right-panel {
+        display: flex;
+        justify-content: center;
+    }
+
+    .square-by3 {
+        width: 12vh;
+        height: 12vh;
+    }
+
+    .square-by4 {
+        width: 9vh;
+        height: 9vh;
+    }
+
+    .title {
+        
+        font-size: 2.2rem;
+        height: 8vh;
+    }
 }
