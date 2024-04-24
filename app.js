@@ -38,6 +38,8 @@
 
     const mainGameEle = document.querySelector('.main-game');
     const muteBtn = document.querySelector('.mute-btn');
+    const audioTag = document.querySelector('.audio-tag');
+
     const by3Btn = document.querySelector('.by3-btn');
     const by4Btn = document.querySelector('.by4-btn');
     const resetGameBtn = document.querySelector('.reset-game-btn');
@@ -55,12 +57,14 @@
     squaresBy4.forEach((square) => square.addEventListener('click', handleSquareClick));
     by3Btn.addEventListener('click', handleBy3Btn);
     by4Btn.addEventListener('click', handleBy4Btn);
+    muteBtn.addEventListener('click', handleClickAudio);
 
     resetGameBtn.addEventListener('click', handleResetBtn);
 
     twoPlayerBtn.addEventListener('click', handleTwoPlayerBtn);
     botSmartBtn.addEventListener('click', handleBotSmartBtn);
     botSimpleBtn.addEventListener('click', handleBotSimpleBtn);
+
 
     // Event handlers
     function handleSquareClick (event) {
@@ -220,6 +224,16 @@
         } else if (mode === botSmart) {
             handleBotSmartBtn();
         }
+    }
+
+    function handleClickAudio () {
+        if (audioTag.paused) {
+            audioTag.play();
+        } else {
+            audioTag.pause();
+        }
+        audioTag.volume = 0.05;
+        audioTag.loop = true;
     }
 
     // Other functions 

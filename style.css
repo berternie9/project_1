@@ -13,7 +13,6 @@ header {
     height: 5vh;
 }
 
-
 .by3-btn, .by4-btn, .reset-game-btn, .bot-simple-btn, .bot-smart-btn, .two-player-btn {
     border: 2px white solid;
     margin: 5px;
@@ -93,7 +92,6 @@ header {
 }
 
 .square-by3, .square-by4 {
-    border: 1px white solid;
     display: grid;
     font-size: 3rem;
     color: white;
@@ -101,13 +99,39 @@ header {
     justify-items: center;
     cursor: crosshair;
 }
+
 .square-by3 {
     width: 15vh;
     height: 15vh;
 }
+
+.square-by3:nth-child(3n+1){
+    border-right: 1px white solid;
+}
+
+.square-by3:nth-child(3n){
+    border-left: 1px white solid;
+}
+
+.square-by3:nth-child(1), .square-by3:nth-child(2), .square-by3:nth-child(3){
+    border-bottom: 1px white solid;
+}
+
+.square-by3:nth-child(7), .square-by3:nth-child(8), .square-by3:nth-child(9){
+    border-top: 1px white solid;
+}
+
 .square-by4 {
     width: 11.25vh;
     height: 11.25vh;
+}
+
+.square-by4:nth-child(4n+1), .square-by4:nth-child(4n+2), .square-by4:nth-child(4n+3) {
+    border-right: 1px white solid;
+}
+
+.square-by4:nth-child(1), .square-by4:nth-child(2), .square-by4:nth-child(3), .square-by4:nth-child(4), .square-by4:nth-child(5), .square-by4:nth-child(6), .square-by4:nth-child(7), .square-by4:nth-child(8), .square-by4:nth-child(9), .square-by4:nth-child(10), .square-by4:nth-child(11), .square-by4:nth-child(12){
+    border-bottom: 1px white solid;
 }
 
 .title {

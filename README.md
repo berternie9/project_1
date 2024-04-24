@@ -11,7 +11,7 @@ Check out my Tic Tac Toe game [here](https://berternie9.github.io/tic-tac-toe/)!
 
 ## Screenshots
 #### Player vs. smart bot (4x4)
-![Screenshots here](images/screenshot_smart_4.png)
+![Screenshots here](static/screenshot_smart_4.png)
 
 ## Technologies used
 - Javascript
@@ -20,5 +20,8 @@ Check out my Tic Tac Toe game [here](https://berternie9.github.io/tic-tac-toe/)!
 - GitHub Pages
 
 ## Next steps
-- Include music
+- Add UX for mobile phones
 - Include animations when winning and when checking boxes
+
+## Acknowledgements
+- Background music: Ryo Fukui (Scenery 1976)
