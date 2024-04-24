@@ -1,6 +1,8 @@
 body {
     background-image: url();
     background-color: mistyrose;
+    margin: 0;
+    font-family: "Sriracha", sans-serif;
 }
 
 h1 {
@@ -8,24 +10,9 @@ h1 {
 }
 
 header {
-    height: 10vh;
+    height: 5vh;
 }
 
-.bot-simple-btn {
-    
-}
-
-.bot-smart-btn {
-    
-}
-
-.by3-btn {
-    
-}
-
-.by4-btn {
-
-}
 
 .by3-btn, .by4-btn, .reset-game-btn, .bot-simple-btn, .bot-smart-btn, .two-player-btn {
     border: 2px white solid;
@@ -38,8 +25,12 @@ header {
     color: #6f93c3;
 }
 
-.center-panel {
-    
+.disabled {
+    pointer-events: none;
+}
+
+.game-mode, .whose-turn, .playerAscore, .playerBscore, .winner {
+    font-weight: initial;
 }
 
 .game-wrapper {
@@ -51,27 +42,19 @@ header {
     gap: 10%;
 }
 
-.left-panel {
-    
-}
-
 .left-panel, .center-panel, .right-panel {
     margin: auto;
 }
 
-.main-game {
-    
-}
-
 .metadata-wrapper {
     display: grid;
-    width: 70vw;
+    width: 75vw;
     grid-template-columns: repeat(4, 1fr);
-    height: 10vh;
+    height: 7vh;
     margin: 0 auto;
     color: lightsteelblue;
     font-weight: bold;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
 }
 
 .mute-btn {
@@ -91,20 +74,25 @@ header {
     margin: 4vh auto;
 }
 
-.right-panel {
-    
-}
+.sriracha-regular {
+    font-family: "Sriracha", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
 
 .squares-wrapper-by3 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-
 }
 
-.square-by3 {
-    width: 15vh;
-    height: 15vh;
+.squares-wrapper-by4 {
+    display: none;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+}
+
+.square-by3, .square-by4 {
     border: 1px white solid;
     display: grid;
     font-size: 3rem;
@@ -113,9 +101,13 @@ header {
     justify-items: center;
     cursor: crosshair;
 }
-
-.squares-wrapper-by4 {
-    display: none;
+.square-by3 {
+    width: 15vh;
+    height: 15vh;
+}
+.square-by4 {
+    width: 11.25vh;
+    height: 11.25vh;
 }
 
 .title {
@@ -123,12 +115,9 @@ header {
     text-decoration: underline;
     margin: 1% 0;
     color: #6f93c3;
-}
-
-.two-player-btn {
-    
-}
-
-.win-counter-wrapper {
-    
+    font-family: "Sriracha", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3rem;
+    height: 15vh;
 }

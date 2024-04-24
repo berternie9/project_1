@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
     <script defer src="app.js"></script>
@@ -17,13 +20,13 @@
         </header>
         <h1 class="title">Tic Tac Toe</h1>
         <div class="metadata-wrapper">
-            <div class="game-mode">Mode: 2 player</div>
-            <div class="whose-turn">Turn: Player 1</div>
+            <div>Mode: <span class="game-mode">2 player</span></div>
+            <div>Turn: <span class="whose-turn">Player 1</span></div>
             <div class="win-counter-wrapper"> 
-                <div class="playerA">Player 1: 0</div>
-                <div class="playerB">Player 2: 0</div>
+                <div><span class="playerA">Player 1</span>: <span class="playerAscore">0</span></div>
+                <div><span class="playerB">Player 2</span>: <span class="playerBscore">0</span></div>
             </div>
-            <div class="winner">Winner: </div>
+           <div>Winner: <span class="winner"></span></div>
         </div>
         <div class="game-wrapper">
             <div class="left-panel">
@@ -33,36 +36,36 @@
             <div class="center-panel">
                 <div class="main-game">
                     <div class="squares-wrapper-by3">
-                        <div data-x="1" data-y="1" class="square-by3">X</div>
-                        <div data-x="1" data-y="2" class="square-by3">O</div>
-                        <div data-x="1" data-y="3" class="square-by3"></div>
-                        <div data-x="2" data-y="1" class="square-by3"></div>
-                        <div data-x="2" data-y="2" class="square-by3"></div>
-                        <div data-x="2" data-y="3" class="square-by3"></div>
-                        <div data-x="3" data-y="1" class="square-by3"></div>
-                        <div data-x="3" data-y="2" class="square-by3"></div>
-                        <div data-x="3" data-y="3" class="square-by3"></div>
+                        <div data-tag="1" class="square-by3"></div>
+                        <div data-tag="2" class="square-by3"></div>
+                        <div data-tag="3" class="square-by3"></div>
+                        <div data-tag="4" class="square-by3"></div>
+                        <div data-tag="5" class="square-by3"></div>
+                        <div data-tag="6" class="square-by3"></div>
+                        <div data-tag="7" class="square-by3"></div>
+                        <div data-tag="8" class="square-by3"></div>
+                        <div data-tag="9" class="square-by3"></div>
                     </div>
                     <div class="squares-wrapper-by4">
-                        <div data-label="1" class="square-by4"></div>
-                        <div data-label="2" class="square-by4"></div>
-                        <div data-label="3" class="square-by4"></div>
-                        <div data-label="4" class="square-by4"></div>
-                        <div data-label="5" class="square-by4"></div>
-                        <div data-label="6" class="square-by4"></div>
-                        <div data-label="7" class="square-by4"></div>
-                        <div data-label="8" class="square-by4"></div>
-                        <div data-label="9" class="square-by4"></div>
-                        <div data-label="10" class="square-by4"></div>
-                        <div data-label="11" class="square-by4"></div>
-                        <div data-label="12" class="square-by4"></div>
-                        <div data-label="13" class="square-by4"></div>
-                        <div data-label="14" class="square-by4"></div>
-                        <div data-label="15" class="square-by4"></div>
-                        <div data-label="16" class="square-by4"></div>
+                        <div data-tag="1" class="square-by4"></div>
+                        <div data-tag="2" class="square-by4"></div>
+                        <div data-tag="3" class="square-by4"></div>
+                        <div data-tag="4" class="square-by4"></div>
+                        <div data-tag="5" class="square-by4"></div>
+                        <div data-tag="6" class="square-by4"></div>
+                        <div data-tag="7" class="square-by4"></div>
+                        <div data-tag="8" class="square-by4"></div>
+                        <div data-tag="9" class="square-by4"></div>
+                        <div data-tag="10" class="square-by4"></div>
+                        <div data-tag="11" class="square-by4"></div>
+                        <div data-tag="12" class="square-by4"></div>
+                        <div data-tag="13" class="square-by4"></div>
+                        <div data-tag="14" class="square-by4"></div>
+                        <div data-tag="15" class="square-by4"></div>
+                        <div data-tag="16" class="square-by4"></div>
                     </div>
                 </div>
-                <div class="reset-game-btn">Reset</div>
+                <div class="reset-game-btn">Reset Board</div>
             </div>
             <div class="right-panel">
                 <div class="two-player-btn">2 player</div>
