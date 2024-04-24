@@ -181,7 +181,7 @@ header {
         width: 65vw;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(2, 1fr);
-        height: 11vh;
+        height: fit-content;
         margin: 0 auto;
         color: #009999;
         font-weight: normal;
