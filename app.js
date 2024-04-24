@@ -1,5 +1,5 @@
 // document.addEventListener("DOMContentLoaded", function () {
-    // States 
+    // States (Finite State Machine)
     let twoPlayer = 0;
     let botSmart = 1;
     let botSimple = 2;
@@ -9,9 +9,14 @@
     let opponentTurn = 4;
     let whoseTurn = userTurn;
 
-    let by3 = 4;
-    let by4 = 5;
+    let by3 = 5;
+    let by4 = 6;
     let gameSize = by3;
+
+    let preventLoss = 7;
+    let attemptWin = 8;
+    let neutral = 9;
+    let smartBotMode = attemptWin;
 
     // Globals
     let playerAscore = 0;
@@ -95,20 +100,29 @@
                     }
                 }, 800);
             }
-            
         } else if (mode === botSmart) {
-            if (!event.target.classList.contains('checked')) {
-                event.target.classList.add('checked');
-                if (whoseTurn === userTurn) {
+            if (whoseTurn === userTurn) {
+                if (!event.target.classList.contains('checked')) {
+                    event.target.classList.add('checked');
                     event.target.textContent = 'X';
-                    event.target.classList.add('X');           
-                } else if (whoseTurn === opponentTurn) {
+                    event.target.classList.add('X');
+                    mainGameEle.classList.add('disabled');
+                    afterChecked();
+                    if (!(isThereAWinner()) && !(allSquaresFilled())) {
+                        handleSquareClick();
+                    }
+                }           
+            } else if (whoseTurn === opponentTurn) {     
+                setTimeout(function () {
                     let target = chooseTargetSmart();
+                    target.classList.add('checked');
                     target.classList.add('O');
                     target.textContent = 'O';
-                }
-        
-                afterChecked();
+                    afterChecked();
+                    if (!(isThereAWinner()) && !(allSquaresFilled())) {
+                        mainGameEle.classList.remove('disabled');
+                    }
+                }, 800);
             }
         }
     }
@@ -221,7 +235,7 @@
                 }
             }
             for (let combo of winningCombosby3) {
-                if ((winningComboPresent(squaresCheckedX, combo)) || (winningComboPresent(squaresCheckedO, combo))) {
+                if ((subarrayPresent(squaresCheckedX, combo)) || (subarrayPresent(squaresCheckedO, combo))) {
                     return true;
                 }
             }
@@ -238,7 +252,7 @@
             }
             
             for (let combo of winningCombosby4) {
-                if ((winningComboPresent(squaresCheckedX, combo)) || (winningComboPresent(squaresCheckedO, combo))) {
+                if ((subarrayPresent(squaresCheckedX, combo)) || (subarrayPresent(squaresCheckedO, combo))) {
                     return true;
                 }
             }
@@ -246,7 +260,7 @@
         return false;
     }
 
-    function winningComboPresent (largeArray, smallArray) {
+    function subarrayPresent (largeArray, smallArray) {
         return smallArray.every((el) => {
             return largeArray.includes(el);
         })
@@ -334,7 +348,7 @@
             
         } else if (gameSize === by4) {
             let squaresFreeO = [];
-            for (let squareBy4 of squaresBy3) {
+            for (let squareBy4 of squaresBy4) {
                 if (!squareBy4.classList.contains('checked')) {
                     squaresFreeO.push(Number(squareBy4.dataset.tag));
                 }
@@ -347,14 +361,211 @@
                 }
             }
         }
-        return;
-
-
     }
 
     function chooseTargetSmart () {
+        let chosenSquareTag;
 
+        let schrodingersX = checkSchrodingers('X');
+        let schrodingersO = checkSchrodingers('O');
+        
+        if (schrodingersO.length !== 0) {
+            smartBotMode = attemptWin;
+        } else if (schrodingersX.length !== 0) {
+            smartBotMode = preventLoss;
+        } else {
+            smartBotMode = neutral;
+        }
+
+        if (smartBotMode === neutral) {
+            return chooseTargetSimple();
+        }
+
+
+        if (gameSize === by3) {
+            let squaresFreeO = [];
+            for (let squareBy3 of squaresBy3) {
+                if (!squareBy3.classList.contains('checked')) {
+                    squaresFreeO.push(Number(squareBy3.dataset.tag));
+                }
+            }
+            
+            if (smartBotMode === preventLoss) {
+                for (let subarray of schrodingersX) {
+                    for (let combo of  winningCombosby3) {
+                        if (subarrayPresent(combo, subarray)) {
+                            let maybeSquareTag = combo.find((tag) => !subarray.includes(tag));
+                            if (squaresFreeO.includes(maybeSquareTag)) {
+                                chosenSquareTag = maybeSquareTag;
+                            }
+                             
+                        }
+                    }
+                }
+            } else if (smartBotMode === attemptWin) {
+                for (let subarray of schrodingersO) {
+                    for (let combo of  winningCombosby3) {
+                        if (subarrayPresent(combo, subarray)) {
+                            let maybeSquareTag = combo.find((tag) => !subarray.includes(tag));
+                            if (squaresFreeO.includes(maybeSquareTag)) {
+                                chosenSquareTag = maybeSquareTag;
+                            }
+                        }
+                    }
+                }
+            } 
+
+            for (let squareBy3 of squaresBy3) {
+                if (Number(squareBy3.dataset.tag) === chosenSquareTag) {
+                    return squareBy3;
+                }
+            }
+            
+        } else if (gameSize === by4) {
+            let squaresFreeO = [];
+            for (let squareBy4 of squaresBy4) {
+                if (!squareBy4.classList.contains('checked')) {
+                    squaresFreeO.push(Number(squareBy4.dataset.tag));
+                }
+            }
+            
+            if (smartBotMode === preventLoss) {
+                for (let subarray of schrodingersX) {
+                    for (let combo of  winningCombosby4) {
+                        if (subarrayPresent(combo, subarray)) {
+                            let maybeSquareTag = combo.find((tag) => !subarray.includes(tag));
+                            if (squaresFreeO.includes(maybeSquareTag)) {
+                                chosenSquareTag = maybeSquareTag;
+                            }
+                             
+                        }
+                    }
+                }
+            } else if (smartBotMode === attemptWin) {
+                for (let subarray of schrodingersO) {
+                    for (let combo of  winningCombosby3) {
+                        if (subarrayPresent(combo, subarray)) {
+                            let maybeSquareTag = combo.find((tag) => !subarray.includes(tag));
+                            if (squaresFreeO.includes(maybeSquareTag)) {
+                                chosenSquareTag = maybeSquareTag;
+                            }
+                        }
+                    }
+                }
+            } 
+
+            for (let squareBy4 of squaresBy4) {
+                if (Number(squareBy4.dataset.tag) === chosenSquareTag) {
+                    return squareBy4;
+                }
+            }
+        }
     }
+
+    function checkSchrodingers(XorO) {
+        let arraySchrodingers = [];
+        let checkedSquares = [];
+        let freeSquares = [];
+
+
+        if (gameSize === by3) {
+            if (XorO === 'X') {
+                for (let squareBy3 of squaresBy3) {
+                    if ((squareBy3.classList.contains('checked')) && (squareBy3.classList.contains('X'))) {
+                        checkedSquares.push(Number(squareBy3.dataset.tag));
+                    }
+                }
+            } else if (XorO === 'O') {
+                for (let squareBy3 of squaresBy3) {
+                    if ((squareBy3.classList.contains('checked')) && (squareBy3.classList.contains('O'))) {
+                        checkedSquares.push(Number(squareBy3.dataset.tag));
+                    }
+                }
+            }
+
+            for (let squareBy3 of squaresBy3) {
+                if (!squareBy3.classList.contains('checked')) {
+                    freeSquares.push(Number(squareBy3.dataset.tag));
+                }
+            }
+
+            for (let combo of winningCombosby3) {
+                let count = 0;
+                let bufferArray = [];
+                let missingTag;
+                for (let i = 0; i < combo.length; i++) {
+                    if (checkedSquares.includes(combo[i])) {
+                        count++;
+                        if (count < 3) {
+                            bufferArray.push(combo[i]);
+                        } 
+                    }
+                    if (count === 2) {
+                        for (let num of combo) {
+                            if (!bufferArray.includes(num)) {
+                                missingTag = num;
+                            }
+                        }
+                        
+                        if (freeSquares.includes(missingTag)) {
+                            arraySchrodingers.push(bufferArray);
+                            break;
+                        }
+                    }
+                }
+            }
+
+        } else if (gameSize === by4) {
+            if (XorO === 'X') {
+                for (let squareBy4 of squaresBy4) {
+                    if ((squareBy4.classList.contains('checked')) && (squareBy4.classList.contains('X'))) {
+                        checkedSquares.push(Number(squareBy4.dataset.tag));
+                    }
+                }
+            } else if (XorO === 'O') {
+                for (let squareBy4 of squaresBy3) {
+                    if ((squareBy4.classList.contains('checked')) && (squareBy4.classList.contains('O'))) {
+                        checkedSquares.push(Number(squareBy4.dataset.tag));
+                    }
+                }
+            }
+
+            for (let squareBy4 of squaresBy4) {
+                if (!squareBy4.classList.contains('checked')) {
+                    freeSquares.push(Number(squareBy4.dataset.tag));
+                }
+            }
+
+            for (let combo of winningCombosby4) {
+                let count = 0;
+                let bufferArray = [];
+                let missingTag;
+                for (let i = 0; i < combo.length; i++) {
+                    if (checkedSquares.includes(combo[i])) {
+                        count++;
+                        if (count < 4) {
+                            bufferArray.push(combo[i]);
+                        } 
+                    }
+                    if (count === 3) {
+                        for (let num of combo) {
+                            if (!bufferArray.includes(num)) {
+                                missingTag = num;
+                            }
+                        }
+                        
+                        if (freeSquares.includes(missingTag)) {
+                            arraySchrodingers.push(bufferArray);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return arraySchrodingers;
+    }
+
+
 
 // });
 
