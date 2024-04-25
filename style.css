@@ -38,7 +38,7 @@ header {
     align-items: center;
     justify-content: center;
     height: 70vh;
-    gap: 10%;
+    gap: 3%;
 }
 
 .left-panel, .center-panel, .right-panel {
@@ -166,7 +166,7 @@ header {
     .game-wrapper {
         grid-template-columns: none;
         grid-template-rows: repeat(3, auto);
-        height: 40vh;
+        height: 30vh;
         padding: 0.5rem;
         margin-top: 0.6rem;
     }
@@ -189,7 +189,7 @@ header {
         align-items: start;
         justify-items: center;
         gap: 1%;
-        padding: none;
+        padding: 0;
     }
 
     .mute-btn-wrapper {
