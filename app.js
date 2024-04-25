@@ -90,21 +90,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     mainGameEle.classList.add('disabled');
                     afterChecked();
                     if (!(isThereAWinner()) && !(allSquaresFilled())) {
-                        handleSquareClick();
+                        simpleBotMove();
                     }
                 }           
-            } else if (whoseTurn === opponentTurn) {     
-                setTimeout(function () {
-                    let target = chooseTargetSimple();
-                    target.classList.add('checked');
-                    target.classList.add('O');
-                    target.textContent = 'O';
-                    afterChecked();
-                    if (!(isThereAWinner()) && !(allSquaresFilled())) {
-                        mainGameEle.classList.remove('disabled');
-                    }
-                }, 800);
-            }
+            } 
         } else if (mode === botSmart) {
             if (whoseTurn === userTurn) {
                 if (!event.target.classList.contains('checked')) {
@@ -114,21 +103,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     mainGameEle.classList.add('disabled');
                     afterChecked();
                     if (!(isThereAWinner()) && !(allSquaresFilled())) {
-                        simpleBotMove();
+                        smartBotMove();
                     }
                 }           
-            } else if (whoseTurn === opponentTurn) {     
-                setTimeout(function () {
-                    let target = chooseTargetSmart();
-                    target.classList.add('checked');
-                    target.classList.add('O');
-                    target.textContent = 'O';
-                    afterChecked();
-                    if (!(isThereAWinner()) && !(allSquaresFilled())) {
-                        mainGameEle.classList.remove('disabled');
-                    }
-                }, 800);
-            }
+            } 
         }
     }
 
@@ -576,6 +554,19 @@ document.addEventListener("DOMContentLoaded", function () {
     function simpleBotMove () {
         setTimeout(function () {
             let target = chooseTargetSimple();
+            target.classList.add('checked');
+            target.classList.add('O');
+            target.textContent = 'O';
+            afterChecked();
+            if (!(isThereAWinner()) && !(allSquaresFilled())) {
+                mainGameEle.classList.remove('disabled');
+            }
+        }, 800);
+    }
+
+    function smartBotMove () {
+        setTimeout(function () {
+            let target = chooseTargetSmart();
             target.classList.add('checked');
             target.classList.add('O');
             target.textContent = 'O';
