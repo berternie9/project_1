@@ -10,8 +10,11 @@ Beep boop.
 Check out my Tic Tac Toe game [here](https://berternie9.github.io/tic-tac-toe/)!
 
 ## Screenshots
-#### Player vs. smart bot (4x4)
-![Screenshots here](static/screenshot.png)
+#### Player vs. smart bot (4x4) desktop
+![Screenshot - smart 4x4 desktop](static/screenshot_smart_4.png)
+
+#### Two player (3x3) mobile phone
+![Screenshot - two player 3x3 phone](static/screenshot_twoplayer_3_mobile.png)
 
 ## Technologies used
 - Javascript
@@ -20,7 +23,7 @@ Check out my Tic Tac Toe game [here](https://berternie9.github.io/tic-tac-toe/)!
 - GitHub Pages
 
 ## Next steps
-- Add UX for mobile phones
+- Improve UX for mobile phones
 - Include more animations 
 
 ## Acknowledgements

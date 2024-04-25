@@ -41,6 +41,13 @@ header {
     gap: 3%;
 }
 
+.kranky-regular {
+    font-family: "Kranky", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+
 .left-panel, .center-panel, .right-panel {
     margin: auto;
 }
@@ -52,7 +59,7 @@ header {
     height: fit-content;
     margin: 0 auto;
     color: #009999;
-    font-weight: bold;
+    font-weight: normal;
     font-size: 1.2rem;
     border-top: 2px solid #009999;
     border-bottom: 2px solid #009999;
@@ -140,14 +147,17 @@ header {
 
 .title {
     text-align: center;
-    text-decoration: underline;
     margin: 1% 0;
     color: #006666;
-    font-family: "Sriracha", sans-serif;
+    font-family: "Kranky", serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 3rem;
-    height: 15vh;
+    font-size: 4rem;
+    height: 5.5rem;
+}
+
+.winner {
+    display: inline-block;
 }
 
 @media (max-width: 420px) {
@@ -219,8 +229,7 @@ header {
     }
 
     .title {
-        
         font-size: 2.2rem;
-        height: 8vh;
+        height: 3.8rem;
     }
 }

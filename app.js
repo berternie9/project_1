@@ -1,4 +1,4 @@
-// document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
     // States (Finite State Machine)
     let twoPlayer = 0;
     let botSmart = 1;
@@ -35,6 +35,7 @@
     const playerAscoreMsg = document.querySelector('.playerAscore');
     const playerBscoreMsg = document.querySelector('.playerBscore');
     const winnerMsg = document.querySelector('.winner');
+    const winnerWrapper = document.querySelector('.winner-wrapper');
 
     const mainGameEle = document.querySelector('.main-game');
     const muteBtn = document.querySelector('.mute-btn');
@@ -235,83 +236,31 @@
         audioTag.volume = 0.03;
         audioTag.loop = true;
     }
-
+    
     // Other functions 
-    function isThereAWinner () {
-        if (gameSize === by3) {
-            let squaresCheckedX = [];
-            let squaresCheckedO = [];
-            for (let squareBy3 of squaresBy3) {
-                if ((squareBy3.classList.contains('checked')) && (squareBy3.classList.contains('X'))) {
-                    squaresCheckedX.push(Number(squareBy3.dataset.tag));
-                } else if ((squareBy3.classList.contains('checked')) && (squareBy3.classList.contains('O'))) {
-                    squaresCheckedO.push(Number(squareBy3.dataset.tag));
-                }
-            }
-            for (let combo of winningCombosby3) {
-                if ((subarrayPresent(squaresCheckedX, combo)) || (subarrayPresent(squaresCheckedO, combo))) {
-                    return true;
-                }
-            }
-        } else if (gameSize === by4) {
-            let squaresCheckedX = [];
-            let squaresCheckedO = [];
-            
-            for (let squareBy4 of squaresBy4) {
-                if ((squareBy4.classList.contains('checked')) && (squareBy4.classList.contains('X'))) {
-                    squaresCheckedX.push(Number(squareBy4.dataset.tag));
-                } else if ((squareBy4.classList.contains('checked')) && (squareBy4.classList.contains('O'))) {
-                    squaresCheckedO.push(Number(squareBy4.dataset.tag));
-                }
-            }
-            
-            for (let combo of winningCombosby4) {
-                if ((subarrayPresent(squaresCheckedX, combo)) || (subarrayPresent(squaresCheckedO, combo))) {
-                    return true;
-                }
-            }
+    function afterChecked () {
+        if (isThereAWinner()) {
+            mainGameEle.classList.add('disabled');
+            incrementScore();
+            winnerMsg.textContent = currentTurnStr();
+            winnerWrapper.classList.add('animate__animated', 'animate__tada');
+            setTimeout(function () {
+                winnerWrapper.className = 'winner-wrapper';
+            }, 1000);
+        } else if (allSquaresFilled()) {
+            mainGameEle.classList.add('disabled');
+            winnerMsg.textContent = "It's a draw!";
+            winnerWrapper.classList.add('animate__animated', 'animate__tada');
+            setTimeout(function () {
+                winnerWrapper.className = 'winner-wrapper';
+            }, 1000);
         }
-        return false;
+        
+        updateWhoseTurnMsg();
+        whoseTurn = (whoseTurn === userTurn) ? opponentTurn : userTurn;
+        
     }
-
-    function subarrayPresent (largeArray, smallArray) {
-        return smallArray.every((el) => {
-            return largeArray.includes(el);
-        })
-    }
-
-    function incrementScore () {
-        if (whoseTurn === userTurn) {
-            playerAscore++;
-            playerAscoreMsg.textContent = playerAscore;
-        } else {
-            playerBscore++;
-            playerBscoreMsg.textContent = playerBscore;
-        }
-    }   
-
-    function currentTurnStr () {
-        if (mode === twoPlayer) {
-            if (whoseTurn === userTurn) {
-                return 'Player 1';
-            } else {
-                return 'Player 2';
-            }
-        } else if ((mode === botSimple) || mode === botSmart) {
-            if (whoseTurn === userTurn) {
-                return 'Player';
-            } else {
-                return 'Bot';
-            }
-        }
-    }
-
-    function updateWhoseTurnMsg () {
-        setTimeout(function () {
-            whoseTurnMsg.textContent = currentTurnStr();
-        }, 500);
-    }
-
+    
     function allSquaresFilled () {
         if (gameSize === by3) {
             for (let square of squaresBy3) {
@@ -328,154 +277,7 @@
         }
         return true;
     }
-
-    function afterChecked () {
-        if (isThereAWinner()) {
-            mainGameEle.classList.add('disabled');
-            incrementScore();
-            winnerMsg.textContent = currentTurnStr();
-        } else if (allSquaresFilled()) {
-            mainGameEle.classList.add('disabled');
-            winnerMsg.textContent = "It's a draw!";
-        }
-
-        updateWhoseTurnMsg();
-        whoseTurn = (whoseTurn === userTurn) ? opponentTurn : userTurn;
-
-    }
-
-    function chooseTargetSimple () {
-        if (gameSize === by3) {
-            let squaresFreeO = [];
-            for (let squareBy3 of squaresBy3) {
-                if (!squareBy3.classList.contains('checked')) {
-                    squaresFreeO.push(Number(squareBy3.dataset.tag));
-                }
-            }
-            let randomIndex = Math.floor(Math.random() * squaresFreeO.length);
-            let chosenSquareTag = squaresFreeO[randomIndex];
-            for (let squareBy3 of squaresBy3) {
-                if (Number(squareBy3.dataset.tag) === chosenSquareTag) {
-                    return squareBy3;
-                }
-            }
-            
-        } else if (gameSize === by4) {
-            let squaresFreeO = [];
-            for (let squareBy4 of squaresBy4) {
-                if (!squareBy4.classList.contains('checked')) {
-                    squaresFreeO.push(Number(squareBy4.dataset.tag));
-                }
-            }
-            let randomIndex = Math.floor(Math.random() * squaresFreeO.length);
-            let chosenSquareTag = squaresFreeO[randomIndex];
-            for (let squareBy4 of squaresBy4) {
-                if (Number(squareBy4.dataset.tag) === chosenSquareTag) {
-                    return squareBy4;
-                }
-            }
-        }
-    }
-
-    function chooseTargetSmart () {
-        let chosenSquareTag;
-
-        let schrodingersX = checkSchrodingers('X');
-        let schrodingersO = checkSchrodingers('O');
-        
-        if (schrodingersO.length !== 0) {
-            smartBotMode = attemptWin;
-        } else if (schrodingersX.length !== 0) {
-            smartBotMode = preventLoss;
-        } else {
-            smartBotMode = neutral;
-        }
-
-        if (smartBotMode === neutral) {
-            return chooseTargetSimple();
-        }
-
-
-        if (gameSize === by3) {
-            let squaresFreeO = [];
-            for (let squareBy3 of squaresBy3) {
-                if (!squareBy3.classList.contains('checked')) {
-                    squaresFreeO.push(Number(squareBy3.dataset.tag));
-                }
-            }
-            
-            if (smartBotMode === preventLoss) {
-                for (let subarray of schrodingersX) {
-                    for (let combo of  winningCombosby3) {
-                        if (subarrayPresent(combo, subarray)) {
-                            let maybeSquareTag = combo.find((tag) => !subarray.includes(tag));
-                            if (squaresFreeO.includes(maybeSquareTag)) {
-                                chosenSquareTag = maybeSquareTag;
-                            }
-                             
-                        }
-                    }
-                }
-            } else if (smartBotMode === attemptWin) {
-                for (let subarray of schrodingersO) {
-                    for (let combo of  winningCombosby3) {
-                        if (subarrayPresent(combo, subarray)) {
-                            let maybeSquareTag = combo.find((tag) => !subarray.includes(tag));
-                            if (squaresFreeO.includes(maybeSquareTag)) {
-                                chosenSquareTag = maybeSquareTag;
-                            }
-                        }
-                    }
-                }
-            } 
-
-            for (let squareBy3 of squaresBy3) {
-                if (Number(squareBy3.dataset.tag) === chosenSquareTag) {
-                    return squareBy3;
-                }
-            }
-            
-        } else if (gameSize === by4) {
-            let squaresFreeO = [];
-            for (let squareBy4 of squaresBy4) {
-                if (!squareBy4.classList.contains('checked')) {
-                    squaresFreeO.push(Number(squareBy4.dataset.tag));
-                }
-            }
-            
-            if (smartBotMode === preventLoss) {
-                for (let subarray of schrodingersX) {
-                    for (let combo of  winningCombosby4) {
-                        if (subarrayPresent(combo, subarray)) {
-                            let maybeSquareTag = combo.find((tag) => !subarray.includes(tag));
-                            if (squaresFreeO.includes(maybeSquareTag)) {
-                                chosenSquareTag = maybeSquareTag;
-                            }
-                             
-                        }
-                    }
-                }
-            } else if (smartBotMode === attemptWin) {
-                for (let subarray of schrodingersO) {
-                    for (let combo of  winningCombosby3) {
-                        if (subarrayPresent(combo, subarray)) {
-                            let maybeSquareTag = combo.find((tag) => !subarray.includes(tag));
-                            if (squaresFreeO.includes(maybeSquareTag)) {
-                                chosenSquareTag = maybeSquareTag;
-                            }
-                        }
-                    }
-                }
-            } 
-
-            for (let squareBy4 of squaresBy4) {
-                if (Number(squareBy4.dataset.tag) === chosenSquareTag) {
-                    return squareBy4;
-                }
-            }
-        }
-    }
-
+    
     function checkSchrodingers(XorO) {
         let arraySchrodingers = [];
         let checkedSquares = [];
@@ -578,8 +380,211 @@
         }
         return arraySchrodingers;
     }
+    
+    function chooseTargetSimple () {
+        if (gameSize === by3) {
+            let squaresFreeO = [];
+            for (let squareBy3 of squaresBy3) {
+                if (!squareBy3.classList.contains('checked')) {
+                    squaresFreeO.push(Number(squareBy3.dataset.tag));
+                }
+            }
+            let randomIndex = Math.floor(Math.random() * squaresFreeO.length);
+            let chosenSquareTag = squaresFreeO[randomIndex];
+            for (let squareBy3 of squaresBy3) {
+                if (Number(squareBy3.dataset.tag) === chosenSquareTag) {
+                    return squareBy3;
+                }
+            }
+            
+        } else if (gameSize === by4) {
+            let squaresFreeO = [];
+            for (let squareBy4 of squaresBy4) {
+                if (!squareBy4.classList.contains('checked')) {
+                    squaresFreeO.push(Number(squareBy4.dataset.tag));
+                }
+            }
+            let randomIndex = Math.floor(Math.random() * squaresFreeO.length);
+            let chosenSquareTag = squaresFreeO[randomIndex];
+            for (let squareBy4 of squaresBy4) {
+                if (Number(squareBy4.dataset.tag) === chosenSquareTag) {
+                    return squareBy4;
+                }
+            }
+        }
+    }
 
+    function chooseTargetSmart () {
+        let chosenSquareTag;
+        let schrodingersX = checkSchrodingers('X');
+        let schrodingersO = checkSchrodingers('O');
+        
+        if (schrodingersO.length !== 0) {
+            smartBotMode = attemptWin;
+        } else if (schrodingersX.length !== 0) {
+            smartBotMode = preventLoss;
+        } else {
+            smartBotMode = neutral;
+        }
 
+        if (smartBotMode === neutral) {
+            return chooseTargetSimple();
+        }
+        
+        if (gameSize === by3) {
+            let squaresFreeO = [];
+            for (let squareBy3 of squaresBy3) {
+                if (!squareBy3.classList.contains('checked')) {
+                    squaresFreeO.push(Number(squareBy3.dataset.tag));
+                }
+            }
+            
+            if (smartBotMode === preventLoss) {
+                for (let subarray of schrodingersX) {
+                    for (let combo of  winningCombosby3) {
+                        if (subarrayPresent(combo, subarray)) {
+                            let maybeSquareTag = combo.find((tag) => !subarray.includes(tag));
+                            if (squaresFreeO.includes(maybeSquareTag)) {
+                                chosenSquareTag = maybeSquareTag;
+                            }
+                             
+                        }
+                    }
+                }
+            } else if (smartBotMode === attemptWin) {
+                for (let subarray of schrodingersO) {
+                    for (let combo of  winningCombosby3) {
+                        if (subarrayPresent(combo, subarray)) {
+                            let maybeSquareTag = combo.find((tag) => !subarray.includes(tag));
+                            if (squaresFreeO.includes(maybeSquareTag)) {
+                                chosenSquareTag = maybeSquareTag;
+                            }
+                        }
+                    }
+                }
+            } 
 
-// });
+            for (let squareBy3 of squaresBy3) {
+                if (Number(squareBy3.dataset.tag) === chosenSquareTag) {
+                    return squareBy3;
+                }
+            }
+            
+        } else if (gameSize === by4) {
+            let squaresFreeO = [];
+            for (let squareBy4 of squaresBy4) {
+                if (!squareBy4.classList.contains('checked')) {
+                    squaresFreeO.push(Number(squareBy4.dataset.tag));
+                }
+            }
+            
+            if (smartBotMode === preventLoss) {
+                for (let subarray of schrodingersX) {
+                    for (let combo of  winningCombosby4) {
+                        if (subarrayPresent(combo, subarray)) {
+                            let maybeSquareTag = combo.find((tag) => !subarray.includes(tag));
+                            if (squaresFreeO.includes(maybeSquareTag)) {
+                                chosenSquareTag = maybeSquareTag;
+                            }
+                             
+                        }
+                    }
+                }
+            } else if (smartBotMode === attemptWin) {
+                for (let subarray of schrodingersO) {
+                    for (let combo of  winningCombosby3) {
+                        if (subarrayPresent(combo, subarray)) {
+                            let maybeSquareTag = combo.find((tag) => !subarray.includes(tag));
+                            if (squaresFreeO.includes(maybeSquareTag)) {
+                                chosenSquareTag = maybeSquareTag;
+                            }
+                        }
+                    }
+                }
+            } 
+
+            for (let squareBy4 of squaresBy4) {
+                if (Number(squareBy4.dataset.tag) === chosenSquareTag) {
+                    return squareBy4;
+                }
+            }
+        }
+    }
+
+    function currentTurnStr () {
+        if (mode === twoPlayer) {
+            if (whoseTurn === userTurn) {
+                return 'Player 1';
+            } else {
+                return 'Player 2';
+            }
+        } else if ((mode === botSimple) || mode === botSmart) {
+            if (whoseTurn === userTurn) {
+                return 'Player';
+            } else {
+                return 'Bot';
+            }
+        }
+    }
+    
+    function incrementScore () {
+        if (whoseTurn === userTurn) {
+            playerAscore++;
+            playerAscoreMsg.textContent = playerAscore;
+        } else {
+            playerBscore++;
+            playerBscoreMsg.textContent = playerBscore;
+        }
+    }   
+
+    function isThereAWinner () {
+        if (gameSize === by3) {
+            let squaresCheckedX = [];
+            let squaresCheckedO = [];
+            for (let squareBy3 of squaresBy3) {
+                if ((squareBy3.classList.contains('checked')) && (squareBy3.classList.contains('X'))) {
+                    squaresCheckedX.push(Number(squareBy3.dataset.tag));
+                } else if ((squareBy3.classList.contains('checked')) && (squareBy3.classList.contains('O'))) {
+                    squaresCheckedO.push(Number(squareBy3.dataset.tag));
+                }
+            }
+            for (let combo of winningCombosby3) {
+                if ((subarrayPresent(squaresCheckedX, combo)) || (subarrayPresent(squaresCheckedO, combo))) {
+                    return true;
+                }
+            }
+        } else if (gameSize === by4) {
+            let squaresCheckedX = [];
+            let squaresCheckedO = [];
+            
+            for (let squareBy4 of squaresBy4) {
+                if ((squareBy4.classList.contains('checked')) && (squareBy4.classList.contains('X'))) {
+                    squaresCheckedX.push(Number(squareBy4.dataset.tag));
+                } else if ((squareBy4.classList.contains('checked')) && (squareBy4.classList.contains('O'))) {
+                    squaresCheckedO.push(Number(squareBy4.dataset.tag));
+                }
+            }
+            
+            for (let combo of winningCombosby4) {
+                if ((subarrayPresent(squaresCheckedX, combo)) || (subarrayPresent(squaresCheckedO, combo))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    function subarrayPresent (largeArray, smallArray) {
+        return smallArray.every((el) => {
+            return largeArray.includes(el);
+        })
+    }
+
+    function updateWhoseTurnMsg () {
+        setTimeout(function () {
+            whoseTurnMsg.textContent = currentTurnStr();
+        }, 500);
+    }
+
+});
 
