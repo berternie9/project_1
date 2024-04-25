@@ -192,7 +192,7 @@ header {
         display: grid;
         width: 65vw;
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
+        grid-template-rows: 1.3fr 2fr;
         height: fit-content;
         margin: 0 auto;
         color: #009999;
@@ -216,6 +216,7 @@ header {
     .right-panel {
         display: flex;
         justify-content: center;
+        padding-bottom: 8%;
     }
 
     .square-by3 {
