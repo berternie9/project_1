@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     mainGameEle.classList.add('disabled');
                     afterChecked();
                     if (!(isThereAWinner()) && !(allSquaresFilled())) {
-                        handleSquareClick();
+                        simpleBotMove();
                     }
                 }           
             } else if (whoseTurn === opponentTurn) {     
@@ -283,7 +283,6 @@ document.addEventListener("DOMContentLoaded", function () {
         let checkedSquares = [];
         let freeSquares = [];
 
-
         if (gameSize === by3) {
             if (XorO === 'X') {
                 for (let squareBy3 of squaresBy3) {
@@ -339,7 +338,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 }
             } else if (XorO === 'O') {
-                for (let squareBy4 of squaresBy3) {
+                for (let squareBy4 of squaresBy4) {
                     if ((squareBy4.classList.contains('checked')) && (squareBy4.classList.contains('O'))) {
                         checkedSquares.push(Number(squareBy4.dataset.tag));
                     }
@@ -574,6 +573,19 @@ document.addEventListener("DOMContentLoaded", function () {
         return false;
     }
 
+    function simpleBotMove () {
+        setTimeout(function () {
+            let target = chooseTargetSimple();
+            target.classList.add('checked');
+            target.classList.add('O');
+            target.textContent = 'O';
+            afterChecked();
+            if (!(isThereAWinner()) && !(allSquaresFilled())) {
+                mainGameEle.classList.remove('disabled');
+            }
+        }, 800);
+    }
+
     function subarrayPresent (largeArray, smallArray) {
         return smallArray.every((el) => {
             return largeArray.includes(el);
@@ -585,6 +597,5 @@ document.addEventListener("DOMContentLoaded", function () {
             whoseTurnMsg.textContent = currentTurnStr();
         }, 500);
     }
-
 });
 

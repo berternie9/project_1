@@ -28,10 +28,6 @@ header {
     pointer-events: none;
 }
 
-.game-mode, .whose-turn, .playerAscore, .playerBscore, .winner {
-    font-weight: initial;
-}
-
 .game-wrapper {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
