@@ -84,12 +84,6 @@ header {
     margin: 4vh auto;
 }
 
-.sriracha-regular {
-    font-family: "Sriracha", cursive;
-    font-weight: 400;
-    font-style: normal;
-  }
-
 .squares-wrapper-by3 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -145,6 +139,12 @@ header {
     border-bottom: 1px #006666 solid;
 }
 
+.sriracha-regular {
+    font-family: "Sriracha", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
 .title {
     text-align: center;
     margin: 1% 0;
@@ -160,10 +160,10 @@ header {
     display: inline-block;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 620px) {
     .by3-btn, .by4-btn, .reset-game-btn, .bot-simple-btn, .bot-smart-btn, .two-player-btn {
-        margin: 5px;
-        padding: 5px;
+        margin: 3px;
+        padding: 4px;
         color: #006666;
         font-size: 0.8rem;
     }
@@ -179,11 +179,13 @@ header {
         height: 30vh;
         padding: 0.5rem;
         margin-top: 0.6rem;
+        gap: 1%;
     }
 
     .left-panel {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+        margin-bottom: 4%;;
     }
 
     .metadata-wrapper {
