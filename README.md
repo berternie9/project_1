@@ -9,10 +9,6 @@ Beep boop.
 ## Getting Started
 Check out my Tic Tac Toe game [here](https://berternie9.github.io/tic-tac-toe/)!
 
-You can also check out a video demo below:
-
-[![Tic Tac Toe screencast](https://img.youtube.com/vi/xZV0Qd1RMsQ/0.jpg)](https://www.youtube.com/watch?v=xZV0Qd1RMsQ)
-
 ## Screenshots
 #### Player vs. smart bot (4x4) desktop
 ![Screenshot - smart 4x4 desktop](static/screenshot_smart_4.png)
